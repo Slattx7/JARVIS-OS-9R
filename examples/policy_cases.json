@@ -1,0 +1,172 @@
+[
+  {
+    "action": "screen.read",
+    "expect": {
+      "decision": "allow",
+      "tier": 0
+    }
+  },
+  {
+    "action": "kv.set",
+    "args": {
+      "key": "brightness",
+      "value": 20
+    },
+    "expect": {
+      "decision": "allow",
+      "tier": 1
+    }
+  },
+  {
+    "action": "message.send",
+    "args": {
+      "to": "x",
+      "body": "y"
+    },
+    "expect": {
+      "decision": "confirm",
+      "tier": 2
+    }
+  },
+  {
+    "action": "message.send",
+    "ctx": {
+      "recent": {
+        "message.send": 5
+      }
+    },
+    "expect": {
+      "decision": "deny",
+      "rule": "message-rate"
+    }
+  },
+  {
+    "action": "fs.delete",
+    "args": {
+      "path": "/home/you/jarvis/a"
+    },
+    "expect": {
+      "decision": "confirm",
+      "tier": 3
+    }
+  },
+  {
+    "action": "fs.write",
+    "args": {
+      "path": "/etc/passwd",
+      "content": "x"
+    },
+    "expect": {
+      "decision": "deny",
+      "rule": "fs-scope"
+    }
+  },
+  {
+    "action": "fs.write",
+    "args": {
+      "path": "/home/you/jarvis/../../etc/x",
+      "content": "x"
+    },
+    "expect": {
+      "decision": "deny"
+    }
+  },
+  {
+    "action": "shell.exec",
+    "args": {
+      "cmd": "rm -rf /"
+    },
+    "expect": {
+      "decision": "deny",
+      "rule": "shell-destructive"
+    }
+  },
+  {
+    "action": "shell.exec",
+    "args": {
+      "cmd": "sh -c 'dd if=/dev/zero of=/dev/sda'"
+    },
+    "expect": {
+      "decision": "deny"
+    }
+  },
+  {
+    "action": "shell.exec",
+    "args": {
+      "cmd": "pm trim-caches 1G"
+    },
+    "expect": {
+      "decision": "confirm",
+      "tier": 3
+    }
+  },
+  {
+    "action": "partition.write",
+    "expect": {
+      "decision": "deny"
+    }
+  },
+  {
+    "action": "kv.set",
+    "args": {
+      "key": "x",
+      "value": 1
+    },
+    "ctx": {
+      "paused": true
+    },
+    "expect": {
+      "decision": "deny",
+      "rule": "paused"
+    }
+  },
+  {
+    "action": "screen.read",
+    "ctx": {
+      "paused": true
+    },
+    "expect": {
+      "decision": "allow"
+    }
+  },
+  {
+    "action": "kv.set",
+    "args": {
+      "key": "x",
+      "value": 1
+    },
+    "ctx": {
+      "risk": {
+        "risk": 0.6
+      }
+    },
+    "expect": {
+      "decision": "confirm",
+      "rule": "risk-confirm"
+    }
+  },
+  {
+    "action": "kv.set",
+    "args": {
+      "key": "x",
+      "value": 1
+    },
+    "ctx": {
+      "risk": {
+        "risk": 0.9
+      }
+    },
+    "expect": {
+      "decision": "deny",
+      "rule": "risk-deny"
+    }
+  },
+  {
+    "action": "never.heard.of.it",
+    "expect": {
+      "decision": "confirm",
+      "tier": 3,
+      "rule": "default"
+    }
+  }
+]

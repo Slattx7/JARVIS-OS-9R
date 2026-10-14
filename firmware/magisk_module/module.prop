@@ -1,0 +1,6 @@
+id=project_omni
+name=Project OMNI EDR (God Mode)
+version=v1.0.0
+versionCode=1
+author=codeinedark77
+description=Production-Grade Mobile EDR: eBPF Kernel Probe + Ubuntu Edge Node + Local LLaMA AI. Auto-boots silent daemon and implements Lazy-AI thermal orchestration.

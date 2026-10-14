@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Testing & Linting
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Heavy AI model weights & caches
+models/*
+!models/.gitkeep
+*.gguf
+*.tflite
+*.onnx
+*.bin
+
+# Runtime databases, blobs, and generated encryption keys
+*.db
+*.db*
+*.db.key
+*.blobs/
+demo.db
+demo.db.blobs/
+demo.db.key

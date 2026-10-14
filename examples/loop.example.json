@@ -1,0 +1,23 @@
+{
+  "root": "jarvis_loop_data",
+  "traces": "traces/",
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "model_config": "/path/to/base-model/config.json",
+  "tiers": {"notes.search": 0, "home.light": 1, "app.open": 1, "shell.run": 3},
+  "default_grant": 1,
+  "deny_tools": [],
+  "arg_match": "exact",
+  "vram_gb": 6.0,
+  "min_train": 150,
+  "min_new_examples": 75,
+  "max_cycles_per_day": 2,
+  "trainer": {"kind": "lora"},
+  "replay": {"kind": "openai", "base_url": "http://127.0.0.1:11434/v1", "model_template": "jarvis:{version}",
+             "timeout_s": 60, "max_tokens": 384},
+  "activate_cmd": ["python", "examples/activate_ollama.py", "{version}", "{artifact}", "qwen2.5:1.5b-instruct"],
+  "promote_hook": [],
+  "gate": {"min_scored": 40, "slice_max_drop": 0.10},
+  "golden_file": "",
+  "monitor": {"min_n": 30, "max_success_drop": 0.05, "window": 300},
+  "auto_rollback": true
+}

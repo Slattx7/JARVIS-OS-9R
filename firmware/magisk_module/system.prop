@@ -1,0 +1,5 @@
+# Project OMNI System Properties
+ro.omni.edr.active=1
+ro.omni.version=1.0.0
+ro.omni.engine=ebpf
+ro.omni.author=codeinedark77

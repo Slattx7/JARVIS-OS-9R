@@ -1,0 +1,31 @@
+{
+  "min_pass": 0.95,
+  "live": [
+    "llm",
+    "permission"
+  ],
+  "on_miss": "positional",
+  "select": {
+    "label": "golden",
+    "limit": 200
+  },
+  "latency": {
+    "max_slowdown": 1.5,
+    "max_pre_tts_ms": 1500,
+    "min_delta_ms": 50
+  },
+  "text_similarity": {
+    "min_ratio": 0.7,
+    "field": "spoken"
+  },
+  "action_sequence": {
+    "min_ratio": 1.0
+  },
+  "new_risky_proposal": {
+    "min_tier": 2
+  },
+  "recall_overlap": {
+    "min_jaccard": 0.5,
+    "k": 5
+  }
+}

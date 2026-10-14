@@ -1,0 +1,9 @@
+{
+  "devices": {
+    "nitro": {"kind": "local"},
+    "9r": {"kind": "adb", "serial": "100.88.162.69:5555", "root": true}
+  },
+  "frida_bin": "/home/codeinedark/miniconda3/envs/ai-empire/bin/frida",
+  "frida_dir": "/home/codeinedark/jarvis/frida_scripts",
+  "audit_path": "/home/codeinedark/.local/share/jarvis/audit.jsonl"
+}

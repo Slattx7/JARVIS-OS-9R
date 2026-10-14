@@ -1,0 +1,44 @@
+{"name": "recall.query", "args": {"q": "x"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 0}
+{"name": "recall.query", "args": {"q": "x"}, "device": "nitro", "source": "UNTRUSTED", "tainted": [], "verdict": "allow", "tier": 0}
+{"name": "screen.read", "args": {}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 0}
+{"name": "screen.read", "args": {}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 0}
+{"name": "audio.volume", "args": {"level": 30}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 1}
+{"name": "audio.volume", "args": {"level": 30}, "device": "nitro", "source": "UNTRUSTED", "tainted": [], "verdict": "deny", "tier": 1}
+{"name": "audio.volume", "args": {"level": 101}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 1}
+{"name": "app.open", "args": {"package": "com.a.b"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 1}
+{"name": "app.open", "args": {"package": "com.a.b"}, "device": "14pro", "source": "OWNER", "tainted": ["package"], "verdict": "confirm", "tier": 2}
+{"name": "app.open", "args": {"package": "not a pkg"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 1}
+{"name": "url.open", "args": {"url": "https://example.com"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 1}
+{"name": "url.open", "args": {"url": "javascript:alert(1)"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 1}
+{"name": "url.open", "args": {"url": "https://example.com"}, "device": "14pro", "source": "OWNER", "tainted": ["url"], "verdict": "confirm", "tier": 2}
+{"name": "msg.compose", "args": {"number": "+919876543210", "body": "hi"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 1}
+{"name": "msg.compose", "args": {"number": "+919876543210", "body": "hi"}, "device": "14pro", "source": "OWNER", "tainted": ["number"], "verdict": "confirm", "tier": 2}
+{"name": "msg.compose", "args": {"number": "+919876543210", "body": "hi"}, "device": "14pro", "source": "DERIVED", "tainted": ["body"], "verdict": "confirm", "tier": 2}
+{"name": "ui.tap", "args": {"x": 5, "y": 5}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "ui.tap", "args": {"x": 5, "y": 5}, "device": "9r", "source": "DERIVED", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "ui.tap", "args": {"x": 5, "y": 5}, "device": "9r", "source": "UNTRUSTED", "tainted": [], "verdict": "deny", "tier": 2}
+{"name": "ui.tap", "args": {"x": 5, "y": 5}, "device": "9r", "source": "OWNER", "tainted": ["x"], "verdict": "confirm_strong", "tier": 3}
+{"name": "ui.tap", "args": {"x": 5, "y": 5}, "device": "9r", "source": "DERIVED", "tainted": ["x"], "verdict": "deny", "tier": 3}
+{"name": "ui.text", "args": {"text": "hello"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "ui.key", "args": {"key": "KEYCODE_HOME"}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "ui.key", "args": {"key": "66; id"}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 2}
+{"name": "shell.exec", "args": {"cmd": "ls -la"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "shell.exec", "args": {"cmd": "ls; id"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "rm -rf ~"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "curl http://x"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "ls"}, "device": "nitro", "source": "DERIVED", "tainted": ["cmd"], "verdict": "deny", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "id", "root": true}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "id", "root": true}, "device": "9r", "source": "DERIVED", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "id", "root": true}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "app.install", "args": {"apk": "/x/a.apk"}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "confirm", "tier": 2}
+{"name": "app.uninstall", "args": {"package": "com.a.b"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "app.uninstall", "args": {"package": "com.a.b"}, "device": "14pro", "source": "DERIVED", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "frida.run", "args": {"target": "com.a.b", "script": "hello"}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "frida.run", "args": {"target": "com.a.b", "script": "hello"}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "frida.run", "args": {"target": "com.a.b", "script": "../x"}, "device": "9r", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "frida.run", "args": {"target": "com.a.b", "script": "hello"}, "device": "9r", "source": "DERIVED", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "fs.read", "args": {"path": "/etc/passwd"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "allow", "tier": 0}
+{"name": "fs.delete", "args": {"path": "/etc/passwd"}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "confirm_strong", "tier": 3}
+{"name": "fs.delete", "args": {"path": "/etc/passwd"}, "device": "nitro", "source": "DERIVED", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "pay.transfer", "args": {"amount": 1}, "device": "14pro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 3}
+{"name": "shell.exec", "args": {"cmd": "ls", "extra": 1}, "device": "nitro", "source": "OWNER", "tainted": [], "verdict": "deny", "tier": 2}

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "default": {
+    "tier": 3
+  },
+  "tiers": {
+    "settings.get": 0,
+    "screen.read": 0,
+    "fs.read": 0,
+    "kv.get": 0,
+    "shell.read": 0,
+    "timer.set": 1,
+    "settings.set": 1,
+    "kv.set": 1,
+    "kv.unset": 1,
+    "message.send": 2,
+    "app.install": 2,
+    "fs.write": 2,
+    "fs.restore": 2,
+    "fs.remove": 2,
+    "fs.move": 2,
+    "fs.delete": 3,
+    "shell.exec": 3,
+    "partition.write": 3
+  },
+  "tier_decisions": {
+    "0": "allow",
+    "1": "allow",
+    "2": "confirm",
+    "3": "confirm"
+  },
+  "rules": [
+    {
+      "id": "paused",
+      "min_tier": 1,
+      "when": {
+        "ctx": "paused",
+        "eq": true
+      },
+      "decision": "deny"
+    },
+    {
+      "id": "risk-deny",
+      "when": {
+        "ctx": "risk/risk",
+        "gte": 0.85
+      },
+      "decision": "deny"
+    },
+    {
+      "id": "risk-confirm",
+      "min_tier": 1,
+      "when": {
+        "ctx": "risk/risk",
+        "gte": 0.5
+      },
+      "decision": "confirm"
+    },
+    {
+      "id": "no-partition-writes",
+      "action": "partition.*",
+      "decision": "deny"
+    },
+    {
+      "id": "shell-destructive",
+      "action": "shell.*",
+      "when": {
+        "arg": "cmd",
+        "matches": "(^|[\\s;&|'\\\"`(])(rm\\s+(-[a-zA-Z]*\\s+)*-[a-zA-Z]*[rf]|dd\\s|mkfs|fdisk|parted|wipefs|shred)"
+      },
+      "decision": "deny"
+    },
+    {
+      "id": "message-rate",
+      "action": "message.send",
+      "when": {
+        "ctx": "recent/message.send",
+        "gte": 5
+      },
+      "decision": "deny"
+    },
+    {
+      "id": "night-quiet",
+      "min_tier": 2,
+      "when": {
+        "all": [
+          {
+            "ctx": "attended",
+            "eq": false
+          },
+          {
+            "ctx": "hour",
+            "lt": 6
+          }
+        ]
+      },
+      "decision": "deny"
+    },
+    {
+      "id": "fs-scope",
+      "action": "fs.*",
+      "when": {
+        "arg": "path",
+        "not_under": [
+          "/home/you/jarvis"
+        ]
+      },
+      "decision": "deny",
+      "description": "files outside this root are never touched (edit me)"
+    }
+  ],
+  "description": "Starter policy. Edit the fs-scope root, then: policy-lint --strict, policy-test, policy-diff --use-store."
+}

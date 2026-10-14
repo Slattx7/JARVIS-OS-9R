@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jarvis-os"
+version = "1.0.0"
+description = "Unified Autonomous Edge Operating System for OnePlus 9R + RTX 3050 Workstation"
+authors = [{ name = "DeepMind & Yash Kandhare" }]
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0",
+    "numpy",
+]
+
+[project.optional-dependencies]
+train = [
+    "torch",
+    "transformers",
+    "peft",
+    "bitsandbytes",
+    "accelerate",
+]
+audio = [
+    "onnxruntime",
+    "sounddevice",
+]
+
+[project.scripts]
+jarvis = "jarvis.cli:main"
+jarvis-os = "jarvis.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jarvis*"]
