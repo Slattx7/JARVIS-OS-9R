@@ -1,7 +1,12 @@
+# ==============================================================================
+# Unified JARVIS 9R OS - Comprehensive Git Ignore
+# ==============================================================================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
 # Distribution / packaging
 build/
@@ -20,34 +25,73 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # Virtual environments
 .env
+.env.*
+!.env.example
 .venv
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
-# Testing & Linting
+# Testing, Coverage & Type Checking
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
 .tox/
 .nox/
+.mypy_cache/
+.ruff_cache/
 
-# Heavy AI model weights & caches
+# Heavy AI model weights & caches (>100MB rejection safety)
 models/*
 !models/.gitkeep
 *.gguf
 *.tflite
 *.onnx
 *.bin
+*.pt
+*.pth
+*.safetensors
+*.ckpt
 
 # Runtime databases, blobs, and generated encryption keys
 *.db
-*.db*
+*.db-journal
+*.db-wal
+*.db-shm
 *.db.key
 *.blobs/
 demo.db
 demo.db.blobs/
 demo.db.key
+events.db
+events.db*
+
+# Logs & Temporary Debug Captures
+*.log
+logs/
+*.png
+*.jpg
+*.jpeg
+screencap.png
+/sdcard/
+
+# IDE & OS Artifacts
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
